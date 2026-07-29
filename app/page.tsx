@@ -16,17 +16,17 @@ const MOMENTS = [
   {
     image: "/projects/ros-industrial-conference.jpg",
     caption: "Presenting hybrid-retrieval RAG results",
-    tag: "ROS-INDUSTRIAL CONFERENCE",
+    tag: "ROS-INDUSTRIAL CONFERENCE — STRASBOURG, NOV 2025",
   },
   {
     image: "/projects/lerobot-hackathon.jpg",
     caption: "Building with the LeRobot community",
-    tag: "LEROBOT WORLDWIDE HACKATHON — HUGGING FACE",
+    tag: "LEROBOT WORLDWIDE HACKATHON — AACHEN, JUN 2025",
   },
   {
     image: "/projects/javaland-volunteer.jpg",
     caption: "Volunteering on-site",
-    tag: "JAVALAND",
+    tag: "JAVALAND — APR 2024 · 1 MO",
   },
 ];
 
@@ -219,8 +219,8 @@ export default function Home() {
           <div>
             <div className="overflow-hidden rounded-3xl border border-black/8">
               <img
-                src="/profile.jpg"
-                alt="Riddhesh More"
+                src="/hero-automatica.jpg"
+                alt="Riddhesh More at automatica 2025, Munich"
                 className="aspect-[4/3] w-full object-cover"
               />
             </div>
@@ -372,6 +372,36 @@ export default function Home() {
                 company: "Fraunhofer IPA, Stuttgart",
                 dates: "07/2025 → 12/2025",
                 note: "Built a multi-agent pipeline using LangChain and LLMs to extract and structure metadata from GitHub repositories.",
+              },
+              {
+                role: "Co-Founder",
+                company: "Parkit",
+                dates: "08/2022 → 09/2024",
+                note: "Co-founded and grew an early-stage venture over its 2-year build.",
+              },
+              {
+                role: "Design Engineer",
+                company: "Fixit Engineering, Mumbai",
+                dates: "06/2022 → 09/2022",
+                note: "Mechanical design engineering work.",
+              },
+              {
+                role: "Chief Operating Officer",
+                company: "Storaku",
+                dates: "06/2020 → 09/2021",
+                note: "Led operations through a 1-year-4-month tenure.",
+              },
+              {
+                role: "Welding Engineer",
+                company: "Larsen & Toubro, Mumbai",
+                dates: "12/2018 → 05/2019",
+                note: "Welding engineering on industrial projects.",
+              },
+              {
+                role: "Heating Air Conditioning Design Engineer",
+                company: "Godrej & Boyce Mfg. Co. Ltd., Mumbai",
+                dates: "06/2017 → 11/2017",
+                note: "HVAC design engineering.",
               },
             ].map((e) => (
               <div key={e.role} className="relative pb-8 pl-8 last:pb-2">
