@@ -380,10 +380,10 @@ export default function Home() {
                 note: "Co-founded and grew an early-stage venture over its 2-year build.",
               },
               {
-                role: "Design Engineer",
+                role: "Design Trainee",
                 company: "Fixit Engineering, Mumbai",
-                dates: "06/2022 → 09/2022",
-                note: "Mechanical design engineering work.",
+                dates: "06/2022 → 11/2022",
+                note: "Assisted in product execution after finalizing designs and prints; defined project requirements by collaborating with internal teams and external partners.",
               },
               {
                 role: "Chief Operating Officer",
@@ -392,16 +392,16 @@ export default function Home() {
                 note: "Led operations through a 1-year-4-month tenure.",
               },
               {
-                role: "Welding Engineer",
-                company: "Larsen & Toubro, Mumbai",
+                role: "Welding Engineering Trainee",
+                company: "Larsen & Toubro Ltd, Mumbai",
                 dates: "12/2018 → 05/2019",
-                note: "Welding engineering on industrial projects.",
+                note: "Programmed an Impact Test Exemption Calculator with VBA; achieved a deposition rate of 48.4 kg/day with TIG overlay; organized seminars and training sessions on welding applications.",
               },
               {
-                role: "Heating Air Conditioning Design Engineer",
+                role: "Heating Air Conditioning Design Trainee",
                 company: "Godrej & Boyce Mfg. Co. Ltd., Mumbai",
                 dates: "06/2017 → 11/2017",
-                note: "HVAC design engineering.",
+                note: "Learned about Daihatsu diesel generators and air conditioning; drafted the piping layout of the chiller system in AutoCAD; estimated the cost of air conditioning ducting.",
               },
             ].map((e) => (
               <div key={e.role} className="relative pb-8 pl-8 last:pb-2">
