@@ -8,19 +8,55 @@ const NAV_LINKS = [
   { href: "#impact", label: "Impact" },
   { href: "#experience", label: "Experience" },
   { href: "#work", label: "Work" },
+  { href: "#moments", label: "Moments" },
   { href: "#skills", label: "Skills" },
 ];
 
-const PROJECTS = [
+const MOMENTS = [
   {
-    title: "Autonomous Vision Stack",
-    meta: "COMPUTER VISION // ROBOTICS",
+    image: "/projects/ros-industrial-conference.jpg",
+    caption: "Presenting hybrid-retrieval RAG results",
+    tag: "ROS-INDUSTRIAL CONFERENCE",
+  },
+  {
+    image: "/projects/lerobot-hackathon.jpg",
+    caption: "Building with the LeRobot community",
+    tag: "LEROBOT WORLDWIDE HACKATHON — HUGGING FACE",
+  },
+  {
+    image: "/projects/javaland-volunteer.jpg",
+    caption: "Volunteering on-site",
+    tag: "JAVALAND",
+  },
+];
+
+type Project = {
+  title: string;
+  meta: string;
+  category: string;
+  description: string;
+  from: string;
+  to: string;
+  url: string;
+  image?: string;
+  video?: string;
+  poster?: string;
+  gallery?: string[];
+};
+
+const PROJECTS: Project[] = [
+  {
+    title: "Open-Vocabulary Mobile Manipulator",
+    meta: "MULTIMODAL AI // MANIPULATION",
     category: "Computer Vision",
     description:
-      "Human-aware perception suite for mobile robots in dynamic warehouse spaces.",
-    from: "SENSOR INPUT",
-    to: "PERCEPTION MODEL",
+      "Multimodal pipeline fusing DeepSeek LLM reasoning with OWL-ViT & SAM3 VLMs for open-vocabulary pick-and-place on a Neobotix MPO-700 + UR5e arm, at the Humanoid Robotics Lab, University of Bonn.",
+    from: "LANGUAGE COMMAND",
+    to: "PICK & PLACE",
     url: "https://github.com/RiddheshMore/steve_pan_tilt_controller",
+    image: "/projects/ovmm-steve.jpg",
+    video: "/projects/command-grounding-demo.mp4",
+    poster: "/projects/command-grounding-poster.jpg",
   },
   {
     title: "Tender Analysis AI",
@@ -41,30 +77,64 @@ const PROJECTS = [
     from: "ROS GRAPH",
     to: "DIAGNOSTICS UI",
     url: "https://github.com/RiddheshMore/ros-component-explorer",
+    video: "/projects/ros-component-explorer-demo.mp4",
+    poster: "/projects/ros-component-explorer-poster.jpg",
+  },
+  {
+    title: "Control Plugin for Solo12 Quadruped",
+    meta: "ROBOTICS // ROS2_CONTROL",
+    category: "Robotics",
+    description:
+      "Mock hardware plugin built on ros2_control, validating joint trajectories and kinematics for a 12-DOF quadruped in RViz/Gazebo.",
+    from: "JOINT COMMANDS",
+    to: "VALIDATED TRAJECTORY",
+    url: "https://github.com/RiddheshMore",
+    image: "/projects/solo12-rviz.jpg",
+    gallery: ["/projects/solo12-gui.jpg"],
+  },
+  {
+    title: "Modular AMR Exploration Platform",
+    meta: "ROBOTICS // MOBILE PLATFORM",
+    category: "Robotics",
+    description:
+      "Modular hex-cell mobile robot chassis built for autonomous exploration, with onboard compute and sensing across a reconfigurable frame.",
+    from: "SENSOR SWEEP",
+    to: "EXPLORATION MAP",
+    url: "https://github.com/RiddheshMore",
+    video: "/projects/amr-demo.mp4",
+    poster: "/projects/amr-demo-poster.jpg",
   },
 ];
 
-const FILTERS = ["All", "Computer Vision", "NLP / LLM", "Dev Tools"];
+const FILTERS = ["All", "Computer Vision", "NLP / LLM", "Dev Tools", "Robotics"];
 
 const SKILL_GROUPS = [
   {
     n: "01",
     title: "Robotics & Perception",
-    tags: ["ROS2", "Computer Vision", "Sensor Fusion", "Edge AI"],
+    tags: ["ROS1/2", "Gazebo", "IsaacSim", "ros2_control", "OpenCV"],
   },
   {
     n: "02",
     title: "AI / ML",
-    tags: ["PyTorch", "TensorFlow", "LangChain", "NLP"],
+    tags: ["Python", "LangChain", "LLMs (DeepSeek)", "VLMs (OWL-ViT, SAM3)"],
   },
-  { n: "03", title: "Backend", tags: ["Python", "Node.js", "REST APIs"] },
+  {
+    n: "03",
+    title: "Retrieval & NLP",
+    tags: ["RAG", "Hybrid Retrieval", "NLP", "Multi-Agent Systems"],
+  },
   {
     n: "04",
-    title: "Cloud & DevOps",
-    tags: ["AWS", "Docker", "Kubernetes", "CI/CD"],
+    title: "Hardware & Control",
+    tags: ["PLCs", "UR5e Arm", "Neobotix MPO-700", "Solo12 Quadruped"],
   },
-  { n: "05", title: "Data", tags: ["PostgreSQL", "SQL", "Power BI"] },
-  { n: "06", title: "Tools", tags: ["Git", "Linux", "VS Code"] },
+  { n: "05", title: "DevOps & Tools", tags: ["Git, GitLab", "CI/CD", "n8n", "Linux"] },
+  {
+    n: "06",
+    title: "Languages",
+    tags: ["English (C1)", "German (B2)", "Hindi", "Marathi"],
+  },
 ];
 
 const reveal = {
@@ -136,7 +206,7 @@ export default function Home() {
             <div className="mt-12 border-t border-black/8 pt-6">
               <p className="placeholder-note-light mb-3">TRUSTED STACK</p>
               <div className="flex flex-wrap gap-2">
-                {["Python", "ROS2", "PyTorch", "TensorFlow", "Docker", "Kubernetes"].map(
+                {["Python", "ROS1/2", "OpenCV", "LangChain", "Gazebo", "PLCs"].map(
                   (t) => (
                     <span key={t} className="chip">
                       {t}
@@ -197,18 +267,30 @@ export default function Home() {
             </div>
             <div>
               <p className="max-w-xl text-base leading-7 text-black/70">
-                I&apos;m a robotics and AI engineer working across perception, NLP, and
-                developer tooling &mdash; building systems that help robots and automation
-                pipelines operate reliably in the real world, from ROS2 navigation stacks
-                to LLM-driven document intelligence.
+                I&apos;m passionate about pushing the envelope of what&apos;s possible in
+                robotics and AI. My work focuses on connecting motion planning, semantic
+                reasoning, and 3D scene graphs &mdash; from ROS2 manipulation stacks to
+                LLM/VLM-driven perception and RAG-based document intelligence, currently as
+                an M.Sc. Autonomous Systems student at Hochschule Bonn-Rhein-Sieg.
               </p>
-              <div className="mt-8 placeholder-card p-6">
-                <p className="placeholder-note-light">// Add your role history here</p>
-                <p className="mt-2 text-sm text-black/45">
-                  This card is a placeholder &mdash; replace with your current role, company,
-                  and years active.
+              <div className="mt-8 card-light p-6">
+                <p className="eyebrow-mono" style={{ color: "oklch(0.6 0.15 145)" }}>
+                  CURRENT ROLE
+                </p>
+                <p className="mt-2 text-lg font-bold">AI Engineer (Werkstudent)</p>
+                <p className="text-sm text-black/55">CinSOIL GmbH, Berlin (Remote) &middot; Jan 2026 &rarr; Present</p>
+                <p className="mt-3 text-sm leading-6 text-black/60">
+                  Building an AI chatbot with RAG and hybrid retrieval, and deploying
+                  optimized models via CI/CD pipelines.
                 </p>
               </div>
+              <a
+                href="/docs/Riddhesh-More-CV.pdf"
+                download
+                className="mt-6 inline-flex items-center gap-2 rounded-full border border-black/15 px-5 py-2.5 text-sm font-semibold hover:bg-black/5"
+              >
+                Download CV &darr;
+              </a>
             </div>
           </div>
         </div>
@@ -230,15 +312,32 @@ export default function Home() {
             Delivering impact.
           </h2>
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="placeholder-card-dark p-6">
-                <p className="text-4xl font-extrabold" style={{ color: "var(--accent)" }}>
-                  &mdash;
+            {[
+              {
+                stat: "76.67%",
+                copy:
+                  "Success@10 on hybrid RAG retrieval — beating a keyword-only baseline (70.66%) while also holding the lowest latency (23ms).",
+                tag: "@ CINSOIL AI CHATBOT",
+              },
+              {
+                stat: "3-Model Fusion",
+                copy:
+                  "An LLM (DeepSeek) plus two VLMs (OWL-ViT, SAM3) combined into one open-vocabulary pick-and-place pipeline on a Neobotix MPO-700 + UR5e arm.",
+                tag: "@ OPEN-VOCAB MOBILE MANIPULATOR",
+              },
+              {
+                stat: "7 Months",
+                copy:
+                  "R&D project building a multi-agent LangChain pipeline to extract and structure metadata from GitHub repositories.",
+                tag: "@ FRAUNHOFER IPA",
+              },
+            ].map((m) => (
+              <div key={m.tag} className="card-dark p-6">
+                <p className="text-3xl font-extrabold" style={{ color: "var(--accent)" }}>
+                  {m.stat}
                 </p>
-                <p className="mt-3 text-sm text-white/60">
-                  Add an impact metric (e.g. % improvement, users served, uptime).
-                </p>
-                <p className="placeholder-note mt-4">@ PROJECT NAME</p>
+                <p className="mt-3 text-sm text-white/60">{m.copy}</p>
+                <p className="eyebrow-mono mt-4 text-white/40">{m.tag}</p>
               </div>
             ))}
           </div>
@@ -261,14 +360,30 @@ export default function Home() {
             Professional Experience
           </h2>
           <div className="timeline-line mx-auto mt-12 max-w-xl text-left">
-            <div className="relative pb-2 pl-8">
-              <span className="timeline-dot absolute -left-[5px] top-1.5" />
-              <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h3 className="text-xl font-bold">Add your current role</h3>
-                <p className="kicker text-sm">MM/YYYY &rarr; Present</p>
+            {[
+              {
+                role: "AI Engineer (Werkstudent)",
+                company: "CinSOIL GmbH, Berlin (Remote)",
+                dates: "01/2026 → Present",
+                note: "Developed an AI chatbot with RAG and hybrid retrieval; deployed optimized AI models via CI/CD pipelines.",
+              },
+              {
+                role: "Research Assistant (R&D Project)",
+                company: "Fraunhofer IPA, Stuttgart",
+                dates: "07/2025 → 12/2025",
+                note: "Built a multi-agent pipeline using LangChain and LLMs to extract and structure metadata from GitHub repositories.",
+              },
+            ].map((e) => (
+              <div key={e.role} className="relative pb-8 pl-8 last:pb-2">
+                <span className="timeline-dot absolute -left-[5px] top-1.5" />
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 className="text-xl font-bold">{e.role}</h3>
+                  <p className="kicker text-sm">{e.dates}</p>
+                </div>
+                <p className="mt-1 text-sm font-semibold text-black/55">{e.company}</p>
+                <p className="mt-1 text-sm leading-6 text-black/60">{e.note}</p>
               </div>
-              <p className="placeholder-note-light mt-1">// Company name &mdash; edit this entry</p>
-            </div>
+            ))}
           </div>
         </div>
       </motion.section>
@@ -310,6 +425,28 @@ export default function Home() {
                 whileHover={{ y: -4, scale: 1.01 }}
                 transition={{ type: "spring", stiffness: 260, damping: 24 }}
               >
+                {(p.video || p.image) && (
+                  <div className="-mx-6 -mt-6 mb-6 overflow-hidden rounded-t-2xl">
+                    {p.video ? (
+                      <video
+                        src={p.video}
+                        poster={p.poster}
+                        className="aspect-video w-full object-cover"
+                        muted
+                        loop
+                        playsInline
+                        autoPlay
+                        preload="none"
+                      />
+                    ) : (
+                      <img
+                        src={p.image}
+                        alt={p.title}
+                        className="aspect-video w-full object-cover"
+                      />
+                    )}
+                  </div>
+                )}
                 <div className="flex items-center justify-between gap-3">
                   <div className="pipeline-node">{p.from}</div>
                   <div className="h-px flex-1 border-t border-dashed" style={{ borderColor: "var(--accent)" }} />
@@ -321,7 +458,48 @@ export default function Home() {
                 </p>
                 <h3 className="mt-2 text-lg font-bold">{p.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-white/65">{p.description}</p>
+                {p.gallery && (
+                  <div className={`mt-4 grid gap-2 ${p.gallery.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}>
+                    {p.gallery.map((src) => (
+                      <img
+                        key={src}
+                        src={src}
+                        alt={`${p.title} detail`}
+                        className="aspect-video w-full rounded-lg object-cover"
+                      />
+                    ))}
+                  </div>
+                )}
               </motion.a>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* MOMENTS */}
+      <motion.section
+        id="moments"
+        className="section-light"
+        variants={reveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
+      >
+        <div className="mx-auto max-w-6xl px-6 py-16 sm:px-10 sm:py-24">
+          <p className="kicker">/ Along the way</p>
+          <h2 className="mt-2 text-3xl font-extrabold tracking-tight sm:text-5xl">
+            Moments.
+          </h2>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {MOMENTS.map((m) => (
+              <div key={m.tag} className="card-light overflow-hidden">
+                <img src={m.image} alt={m.caption} className="aspect-[4/3] w-full object-cover" />
+                <div className="p-5">
+                  <p className="text-sm font-semibold">{m.caption}</p>
+                  <p className="eyebrow-mono mt-2 text-black/40">{m.tag}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -393,12 +571,16 @@ export default function Home() {
               <div className="mt-10 flex flex-col gap-5">
                 <div>
                   <p className="field-label">Primary email</p>
-                  <p className="mt-1 text-lg font-semibold">your.email@example.com</p>
-                  <p className="placeholder-note mt-0.5">// add your real email</p>
+                  <a
+                    href="mailto:riddheshmore27@gmail.com"
+                    className="mt-1 inline-block text-lg font-semibold hover:underline"
+                  >
+                    riddheshmore27@gmail.com
+                  </a>
                 </div>
                 <div>
                   <p className="field-label">Location</p>
-                  <p className="mt-1 text-lg font-semibold">Add your location</p>
+                  <p className="mt-1 text-lg font-semibold">Bonn, Germany</p>
                 </div>
                 <div>
                   <p className="field-label">GitHub</p>
@@ -413,7 +595,14 @@ export default function Home() {
                 </div>
                 <div>
                   <p className="field-label">LinkedIn</p>
-                  <p className="mt-1 text-lg font-semibold text-white/50">Add your LinkedIn URL</p>
+                  <a
+                    href="https://www.linkedin.com/in/riddheshmore"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1 inline-block text-lg font-semibold hover:underline"
+                  >
+                    linkedin.com/in/riddheshmore
+                  </a>
                 </div>
               </div>
             </div>
@@ -427,7 +616,7 @@ export default function Home() {
                 const body = encodeURIComponent(
                   `From: ${data.get("name")} (${data.get("email")})\n\n${data.get("message")}`,
                 );
-                window.location.href = `mailto:your.email@example.com?subject=${subject}&body=${body}`;
+                window.location.href = `mailto:riddheshmore27@gmail.com?subject=${subject}&body=${body}`;
               }}
             >
               <div className="grid gap-5 sm:grid-cols-2">
