@@ -143,23 +143,99 @@ const reveal = {
 };
 
 const CURRENT_ROLE_CONTRIBUTIONS = [
-  "Architected a secure multi-tenant RAG backend using FastAPI, Qdrant, and SQLite with strict tenant-level data isolation.",
-  "Benchmarked 7 OCR/VLM pipelines (Docling, GLM-OCR, Qwen3-VL, Granite-Vision, etc.) for scanned agronomic PDFs, tables, and charts.",
-  "Designed ingestion with contextual embeddings, heading-aware chunking, ColBERT table retrieval, and chart-to-CSV extraction.",
-  "Built a DeepEval framework for Faithfulness, Answer Relevancy, Contextual Precision, and Recall with golden dataset regression testing.",
-  "Implemented adaptive Top-K hybrid retrieval using Jina embeddings, BM25/BM42, cross-encoder reranking, and parent-table reconstruction.",
-  "Developed LangGraph agent workflows for live PostgreSQL queries over field, soil, and NDVI data.",
-  "Deployed production services on AWS EC2 with vLLM, Ollama, systemd, and GitHub-based deployments.",
-  "Created custom Claude Code skills for systematic debugging on EC2.",
-  "Used Playwright for automated UI/UX and workflow testing.",
-  "Implemented LangFuse tracing (retrieval, tool-calls, generation) for latency and tool-routing debugging.",
+  {
+    title: "Multi-tenant backend",
+    desc: "FastAPI + Qdrant + SQLite, hard tenant-level isolation",
+    icon: (
+      <>
+        <rect x="3" y="3" width="7" height="7" rx="1" />
+        <rect x="14" y="3" width="7" height="7" rx="1" />
+        <rect x="3" y="14" width="7" height="7" rx="1" />
+        <rect x="14" y="14" width="7" height="7" rx="1" />
+      </>
+    ),
+  },
+  {
+    title: "7-way OCR/VLM bake-off",
+    desc: "Docling, GLM-OCR, Qwen3-VL, Granite-Vision on scanned agronomic PDFs",
+    icon: <path d="M3 12h4l2-8 4 16 2-8h6" />,
+  },
+  {
+    title: "Context-aware ingestion",
+    desc: "Heading-aware chunking, ColBERT table retrieval, chart-to-CSV",
+    icon: <path d="M4 6h16M4 12h10M4 18h13" />,
+  },
+  {
+    title: "DeepEval regression suite",
+    desc: "Faithfulness, Relevancy, Precision/Recall against golden set",
+    icon: (
+      <>
+        <path d="M9 12l2 2 4-4" />
+        <path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6l7-3z" />
+      </>
+    ),
+  },
+  {
+    title: "Adaptive top-k retrieval",
+    desc: "Jina dense + BM25/42 sparse, cross-encoder rerank",
+    icon: (
+      <>
+        <circle cx="12" cy="12" r="8" />
+        <path d="M12 8v4l3 2" />
+      </>
+    ),
+  },
+  {
+    title: "LangGraph field agent",
+    desc: "Live PostgreSQL queries over field, soil, NDVI data",
+    icon: (
+      <>
+        <circle cx="5" cy="6" r="2.3" />
+        <circle cx="19" cy="6" r="2.3" />
+        <circle cx="12" cy="18" r="2.3" />
+        <path d="M7 7.3L10.3 16M17 7.3L13.7 16M7.3 6h9.4" />
+      </>
+    ),
+  },
+  {
+    title: "Production on EC2",
+    desc: "vLLM, Ollama, systemd, GitHub-driven deploys",
+    icon: <path d="M7 17a4 4 0 01-1-7.9 5 5 0 019.6-1.7A4.5 4.5 0 0117 17H7z" />,
+  },
+  {
+    title: "Playwright coverage",
+    desc: "Automated UI/UX and workflow testing",
+    icon: (
+      <>
+        <rect x="4" y="4" width="16" height="16" rx="2" />
+        <path d="M9 9l6 3-6 3V9z" />
+      </>
+    ),
+  },
+  {
+    title: "LangFuse tracing",
+    desc: "Retrieval, tool calls, generation for latency debugging",
+    icon: <path d="M3 12h3l2-7 4 14 2-9 2 5h5" />,
+  },
+  {
+    title: "vLLM inference + quantization",
+    desc: "Serving on vLLM, benchmarked AWQ/GPTQ/fp8 for latency vs. answer quality on the L4 GPU",
+    icon: (
+      <>
+        <rect x="4" y="4" width="7" height="7" rx="1.5" />
+        <rect x="13" y="4" width="7" height="7" rx="1.5" opacity="0.55" />
+        <rect x="4" y="13" width="7" height="7" rx="1.5" opacity="0.3" />
+        <rect x="13" y="13" width="7" height="7" rx="1.5" opacity="0.15" />
+      </>
+    ),
+  },
 ];
 
 const CURRENT_ROLE_PROBLEMS_SOLVED = [
-  "Eliminated cross-tenant data leakage through end-to-end tenant isolation.",
-  "Improved retrieval quality for complex scanned PDFs with long tables and charts.",
-  "Replaced manual RAG validation with automated evaluation and regression testing.",
-  "Enabled grounded AI responses across unstructured documents and live agricultural databases.",
+  { num: "A ≠ B", label: "Tenant A can never read Tenant B's documents — enforced at the query, not the UI" },
+  { num: "↑", label: "Retrieval quality on scanned tables & charts" },
+  { num: "Δ", label: "Manual RAG checks replaced by automated regression" },
+  { num: "2→1", label: "Documents + live DB, one grounded answer" },
 ];
 
 const CURRENT_ROLE_TECH_STACK = [
@@ -602,10 +678,24 @@ export default function Home() {
 
                 <div className="mt-5">
                   <p className="eyebrow-mono text-black/55">key contributions</p>
-                  <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  <div className="mt-3 grid gap-px overflow-hidden rounded-lg border border-black/10 bg-black/10 sm:grid-cols-3">
                     {CURRENT_ROLE_CONTRIBUTIONS.map((item) => (
-                      <div key={item} className="rounded-lg border border-black/10 bg-white/75 p-3">
-                        <p className="text-sm leading-6 text-black/65">{item}</p>
+                      <div key={item.title} className="flex flex-col gap-2 bg-white/90 p-3.5">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="h-[19px] w-[19px]"
+                          style={{ color: "oklch(0.65 0.16 45)" }}
+                        >
+                          {item.icon}
+                        </svg>
+                        <p className="text-xs leading-5 text-black/65">
+                          <span className="font-semibold text-black">{item.title}</span> — {item.desc}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -613,10 +703,17 @@ export default function Home() {
 
                 <div className="mt-5">
                   <p className="eyebrow-mono text-black/55">problems solved</p>
-                  <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  <div className="mt-3 grid gap-2 sm:grid-cols-4">
                     {CURRENT_ROLE_PROBLEMS_SOLVED.map((item) => (
-                      <div key={item} className="rounded-lg border border-black/10 bg-white/75 p-3">
-                        <p className="text-sm leading-6 text-black/65">{item}</p>
+                      <div
+                        key={item.num}
+                        className="rounded-lg p-3.5"
+                        style={{ background: "oklch(0.6 0.15 145 / 0.1)" }}
+                      >
+                        <p className="font-mono text-lg font-semibold" style={{ color: "oklch(0.6 0.15 145)" }}>
+                          {item.num}
+                        </p>
+                        <p className="mt-1.5 text-xs leading-5 text-black/60">{item.label}</p>
                       </div>
                     ))}
                   </div>
@@ -628,12 +725,12 @@ export default function Home() {
                     <p className="text-xs text-black/55">OCR/VLM pipelines benchmarked</p>
                   </div>
                   <div className="rounded-lg border border-black/10 bg-white p-3">
-                    <p className="text-xl font-bold">10+</p>
-                    <p className="text-xs text-black/55">major platform contributions</p>
+                    <p className="text-xl font-bold">6</p>
+                    <p className="text-xs text-black/55">tools the agent can call per query</p>
                   </div>
                   <div className="rounded-lg border border-black/10 bg-white p-3">
-                    <p className="text-xl font-bold">4</p>
-                    <p className="text-xs text-black/55">core problems solved</p>
+                    <p className="text-xl font-bold">≤10</p>
+                    <p className="text-xs text-black/55">reasoning steps before it must answer</p>
                   </div>
                 </div>
               </div>
