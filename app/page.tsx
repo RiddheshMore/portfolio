@@ -163,18 +163,84 @@ const CURRENT_ROLE_PROBLEMS_SOLVED = [
 ];
 
 const CURRENT_ROLE_TECH_STACK = [
-  { icon: "FA", label: "FastAPI" },
-  { icon: "QD", label: "Qdrant" },
-  { icon: "SQ", label: "SQLite" },
-  { icon: "LG", label: "LangGraph" },
-  { icon: "PG", label: "PostgreSQL" },
-  { icon: "DE", label: "DeepEval" },
-  { icon: "JL", label: "Jina" },
-  { icon: "BM", label: "BM25/BM42" },
-  { icon: "CE", label: "Cross-Encoder" },
-  { icon: "LF", label: "LangFuse" },
-  { icon: "VV", label: "vLLM" },
-  { icon: "OL", label: "Ollama" },
+  { label: "FastAPI", path: "M4 12l6-8h6l-4 7h6l-10 11 2-10H4z" },
+  {
+    label: "Qdrant",
+    path: "M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z",
+    extra: <circle cx="12" cy="12" r="2.6" />,
+  },
+  {
+    label: "SQLite",
+    extra: (
+      <>
+        <ellipse cx="12" cy="6" rx="7" ry="3" />
+        <path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6" />
+        <path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3" />
+      </>
+    ),
+  },
+  {
+    label: "LangGraph",
+    extra: (
+      <>
+        <circle cx="5" cy="6" r="2.3" />
+        <circle cx="19" cy="6" r="2.3" />
+        <circle cx="12" cy="18" r="2.3" />
+        <path d="M7 7.3L10.3 16M17 7.3L13.7 16M7.3 6h9.4" />
+      </>
+    ),
+  },
+  {
+    label: "PostgreSQL",
+    extra: (
+      <>
+        <ellipse cx="12" cy="6" rx="7" ry="3" />
+        <path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6" />
+        <path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3" />
+      </>
+    ),
+  },
+  {
+    label: "DeepEval",
+    extra: (
+      <>
+        <path d="M9 12l2 2 4-4" />
+        <path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6l7-3z" />
+      </>
+    ),
+  },
+  { label: "Jina", path: "M3 12h3l2-7 4 14 2-9 2 5h5" },
+  { label: "BM25/BM42", extra: <><circle cx="10" cy="10" r="6" /><path d="M14.5 14.5L20 20" /></> },
+  {
+    label: "Cross-Encoder",
+    extra: (
+      <>
+        <path d="M4 8h9M4 16h9" />
+        <path d="M9 5l4 3-4 3M19 13l-4 3 4 3" />
+      </>
+    ),
+  },
+  { label: "LangFuse", path: "M3 12h3l2-7 4 14 2-9 2 5h5" },
+  {
+    label: "vLLM",
+    extra: (
+      <>
+        <rect x="4" y="4" width="7" height="7" rx="1.5" />
+        <rect x="13" y="4" width="7" height="7" rx="1.5" opacity="0.55" />
+        <rect x="4" y="13" width="7" height="7" rx="1.5" opacity="0.3" />
+        <rect x="13" y="13" width="7" height="7" rx="1.5" opacity="0.15" />
+      </>
+    ),
+  },
+  {
+    label: "Ollama",
+    extra: (
+      <>
+        <rect x="6" y="6" width="12" height="12" rx="1.5" />
+        <path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3" />
+      </>
+    ),
+  },
 ];
 
 export default function Home() {
@@ -308,7 +374,10 @@ export default function Home() {
                 LLM/VLM-driven perception and RAG-based document intelligence, currently as
                 an M.Sc. Autonomous Systems student at Hochschule Bonn-Rhein-Sieg.
               </p>
-              <div className="mt-8 card-light p-6">
+            </div>
+          </div>
+
+          <div className="mt-10 card-light p-6">
                 <p className="eyebrow-mono" style={{ color: "oklch(0.6 0.15 145)" }}>
                   CURRENT ROLE
                 </p>
@@ -332,9 +401,19 @@ export default function Home() {
                         key={tech.label}
                         className="inline-flex items-center gap-2 rounded-full border border-black/12 bg-white px-3 py-1.5 text-xs font-semibold text-black/70"
                       >
-                        <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[var(--ink)] text-[10px] font-bold text-white">
-                          {tech.icon}
-                        </span>
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="h-3.5 w-3.5 shrink-0"
+                          style={{ color: "oklch(0.6 0.15 145)" }}
+                        >
+                          {tech.path && <path d={tech.path} />}
+                          {tech.extra}
+                        </svg>
                         {tech.label}
                       </span>
                     ))}
@@ -520,8 +599,6 @@ export default function Home() {
               >
                 Download CV &darr;
               </a>
-            </div>
-          </div>
         </div>
       </motion.section>
 
