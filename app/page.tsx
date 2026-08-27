@@ -142,6 +142,32 @@ const reveal = {
   visible: { opacity: 1, y: 0 },
 };
 
+const CURRENT_ROLE_CONTRIBUTIONS = [
+  "Architected a secure multi-tenant RAG backend using FastAPI, Qdrant, and SQLite with strict tenant-level data isolation.",
+  "Benchmarked 7 OCR/VLM pipelines (Docling, GLM-OCR, Qwen3-VL, Granite-Vision, etc.) for scanned agronomic PDFs, tables, and charts.",
+  "Designed ingestion with contextual embeddings, heading-aware chunking, ColBERT table retrieval, and chart-to-CSV extraction.",
+  "Built a DeepEval framework for Faithfulness, Answer Relevancy, Contextual Precision, and Recall with golden dataset regression testing.",
+  "Implemented adaptive Top-K hybrid retrieval using Jina embeddings, BM25/BM42, cross-encoder reranking, and parent-table reconstruction.",
+  "Developed LangGraph agent workflows for live PostgreSQL queries over field, soil, and NDVI data.",
+  "Deployed production services on AWS EC2 with vLLM, Ollama, systemd, and GitHub-based deployments.",
+  "Created custom Claude Code skills for systematic debugging on EC2.",
+  "Used Playwright for automated UI/UX and workflow testing.",
+  "Implemented LangFuse tracing (retrieval, tool-calls, generation) for latency and tool-routing debugging.",
+];
+
+const CURRENT_ROLE_PROBLEMS_SOLVED = [
+  "Eliminated cross-tenant data leakage through end-to-end tenant isolation.",
+  "Improved retrieval quality for complex scanned PDFs with long tables and charts.",
+  "Replaced manual RAG validation with automated evaluation and regression testing.",
+  "Enabled grounded AI responses across unstructured documents and live agricultural databases.",
+];
+
+const PLATFORM_FLOW = [
+  "Farm Reports + PDFs",
+  "Hybrid Retrieval + Agents",
+  "Grounded Agronomy Answers",
+];
+
 export default function Home() {
   const [filter, setFilter] = useState("All");
   const visibleProjects =
@@ -277,12 +303,60 @@ export default function Home() {
                 <p className="eyebrow-mono" style={{ color: "oklch(0.6 0.15 145)" }}>
                   CURRENT ROLE
                 </p>
-                <p className="mt-2 text-lg font-bold">AI Engineer (Werkstudent)</p>
-                <p className="text-sm text-black/55">CinSOIL GmbH, Berlin (Remote) &middot; Jan 2026 &rarr; Present</p>
-                <p className="mt-3 text-sm leading-6 text-black/60">
-                  Building an AI chatbot with RAG and hybrid retrieval, and deploying
-                  optimized models via CI/CD pipelines.
+                <p className="mt-2 text-lg font-bold">
+                  AI-gronomist &mdash; Agentic RAG Platform for Precision Agriculture
                 </p>
+                <p className="text-sm text-black/55">
+                  CinSOIL GmbH, Berlin (Remote) &middot; Jan 2026 &rarr; Present
+                </p>
+                <p className="mt-3 text-sm leading-6 text-black/60">
+                  Developed an enterprise-grade multi-tenant Agentic RAG platform
+                  enabling agronomists to query farm reports, soil analyses, satellite
+                  imagery, and field data using natural language.
+                </p>
+                <div className="mt-5 rounded-xl border border-black/10 bg-white/70 p-4">
+                  <p className="eyebrow-mono text-black/55">platform flow</p>
+                  <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center">
+                    {PLATFORM_FLOW.map((step, i) => (
+                      <div key={step} className="flex items-center gap-2">
+                        <motion.div
+                          className="rounded-lg border border-black/15 bg-white px-3 py-2 text-xs font-semibold text-black/70"
+                          initial={{ opacity: 0, y: 8 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.3, delay: i * 0.08 }}
+                        >
+                          {step}
+                        </motion.div>
+                        {i < PLATFORM_FLOW.length - 1 && (
+                          <motion.span
+                            className="text-sm text-black/35"
+                            animate={{ x: [0, 3, 0], opacity: [0.45, 0.8, 0.45] }}
+                            transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+                          >
+                            &rarr;
+                          </motion.span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="mt-5">
+                  <p className="eyebrow-mono text-black/55">key contributions</p>
+                  <ul className="mt-2 list-disc space-y-2 pl-5 text-sm leading-6 text-black/65">
+                    {CURRENT_ROLE_CONTRIBUTIONS.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="mt-5">
+                  <p className="eyebrow-mono text-black/55">problems solved</p>
+                  <ul className="mt-2 list-disc space-y-2 pl-5 text-sm leading-6 text-black/65">
+                    {CURRENT_ROLE_PROBLEMS_SOLVED.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
               <a
                 href="/docs/Riddhesh-More-CV.pdf"
@@ -374,22 +448,10 @@ export default function Home() {
                 note: "Built a multi-agent pipeline using LangChain and LLMs to extract and structure metadata from GitHub repositories.",
               },
               {
-                role: "Co-Founder",
-                company: "Parkit",
-                dates: "08/2022 → 09/2024",
-                note: "Co-founded and grew an early-stage venture over its 2-year build.",
-              },
-              {
                 role: "Design Trainee",
                 company: "Fixit Engineering, Mumbai",
                 dates: "06/2022 → 11/2022",
                 note: "Assisted in product execution after finalizing designs and prints; defined project requirements by collaborating with internal teams and external partners.",
-              },
-              {
-                role: "Chief Operating Officer",
-                company: "Storaku",
-                dates: "06/2020 → 09/2021",
-                note: "Led operations through a 1-year-4-month tenure.",
               },
               {
                 role: "Welding Engineering Trainee",
