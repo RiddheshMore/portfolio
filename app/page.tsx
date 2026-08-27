@@ -162,10 +162,19 @@ const CURRENT_ROLE_PROBLEMS_SOLVED = [
   "Enabled grounded AI responses across unstructured documents and live agricultural databases.",
 ];
 
-const PLATFORM_FLOW = [
-  "Farm Reports + PDFs",
-  "Hybrid Retrieval + Agents",
-  "Grounded Agronomy Answers",
+const CURRENT_ROLE_TECH_STACK = [
+  { icon: "FA", label: "FastAPI" },
+  { icon: "QD", label: "Qdrant" },
+  { icon: "SQ", label: "SQLite" },
+  { icon: "LG", label: "LangGraph" },
+  { icon: "PG", label: "PostgreSQL" },
+  { icon: "DE", label: "DeepEval" },
+  { icon: "JL", label: "Jina" },
+  { icon: "BM", label: "BM25/BM42" },
+  { icon: "CE", label: "Cross-Encoder" },
+  { icon: "LF", label: "LangFuse" },
+  { icon: "VV", label: "vLLM" },
+  { icon: "OL", label: "Ollama" },
 ];
 
 export default function Home() {
@@ -314,48 +323,194 @@ export default function Home() {
                   enabling agronomists to query farm reports, soil analyses, satellite
                   imagery, and field data using natural language.
                 </p>
+
+                <div className="mt-5">
+                  <p className="eyebrow-mono text-black/55">tech stack</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {CURRENT_ROLE_TECH_STACK.map((tech) => (
+                      <span
+                        key={tech.label}
+                        className="inline-flex items-center gap-2 rounded-full border border-black/12 bg-white px-3 py-1.5 text-xs font-semibold text-black/70"
+                      >
+                        <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[var(--ink)] text-[10px] font-bold text-white">
+                          {tech.icon}
+                        </span>
+                        {tech.label}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
                 <div className="mt-5 rounded-xl border border-black/10 bg-white/70 p-4">
-                  <p className="eyebrow-mono text-black/55">platform flow</p>
-                  <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center">
-                    {PLATFORM_FLOW.map((step, i) => (
-                      <div key={step} className="flex items-center gap-2">
-                        <motion.div
-                          className="rounded-lg border border-black/15 bg-white px-3 py-2 text-xs font-semibold text-black/70"
-                          initial={{ opacity: 0, y: 8 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.3, delay: i * 0.08 }}
+                  <p className="eyebrow-mono text-black/55">agentic reasoning loop</p>
+                  <div className="mt-3 rounded-lg border border-black/10 bg-white p-3">
+                    <svg
+                      viewBox="0 0 640 250"
+                      className="h-auto w-full"
+                      role="img"
+                      aria-label="Agentic reasoning loop from farm reports and PDFs through hybrid retrieval and agents to grounded agronomy answers"
+                    >
+                      <defs>
+                        <marker
+                          id="arrow"
+                          markerWidth="8"
+                          markerHeight="8"
+                          refX="7"
+                          refY="4"
+                          orient="auto"
                         >
-                          {step}
-                        </motion.div>
-                        {i < PLATFORM_FLOW.length - 1 && (
-                          <motion.span
-                            className="text-sm text-black/35"
-                            animate={{ x: [0, 3, 0], opacity: [0.45, 0.8, 0.45] }}
-                            transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
-                          >
-                            &rarr;
-                          </motion.span>
-                        )}
+                          <path d="M0,0 L8,4 L0,8 z" fill="#1f1f1f" />
+                        </marker>
+                      </defs>
+                      <rect
+                        x="30"
+                        y="92"
+                        width="175"
+                        height="66"
+                        rx="14"
+                        fill="#fdfdfb"
+                        stroke="#1f1f1f"
+                        strokeOpacity="0.2"
+                      />
+                      <rect
+                        x="235"
+                        y="52"
+                        width="175"
+                        height="66"
+                        rx="14"
+                        fill="#fdfdfb"
+                        stroke="#1f1f1f"
+                        strokeOpacity="0.2"
+                      />
+                      <rect
+                        x="235"
+                        y="132"
+                        width="175"
+                        height="66"
+                        rx="14"
+                        fill="#fdfdfb"
+                        stroke="#1f1f1f"
+                        strokeOpacity="0.2"
+                      />
+                      <rect
+                        x="440"
+                        y="92"
+                        width="175"
+                        height="66"
+                        rx="14"
+                        fill="#fdfdfb"
+                        stroke="#1f1f1f"
+                        strokeOpacity="0.2"
+                      />
+                      <path
+                        d="M205 125 H225"
+                        stroke="#1f1f1f"
+                        strokeOpacity="0.45"
+                        strokeWidth="2"
+                        markerEnd="url(#arrow)"
+                      />
+                      <path
+                        d="M410 85 H430"
+                        stroke="#1f1f1f"
+                        strokeOpacity="0.45"
+                        strokeWidth="2"
+                        markerEnd="url(#arrow)"
+                      />
+                      <path
+                        d="M410 165 H430"
+                        stroke="#1f1f1f"
+                        strokeOpacity="0.45"
+                        strokeWidth="2"
+                        markerEnd="url(#arrow)"
+                      />
+                      <path
+                        d="M525 158 C525 228, 120 228, 120 165"
+                        fill="none"
+                        stroke="#1f1f1f"
+                        strokeOpacity="0.28"
+                        strokeWidth="2"
+                        strokeDasharray="6 6"
+                        markerEnd="url(#arrow)"
+                      />
+                      <text
+                        x="118"
+                        y="118"
+                        textAnchor="middle"
+                        style={{ fontSize: "12px", fill: "rgba(18,18,18,0.75)", fontWeight: 700 }}
+                      >
+                        Farm Reports + PDFs
+                      </text>
+                      <text
+                        x="322"
+                        y="78"
+                        textAnchor="middle"
+                        style={{ fontSize: "12px", fill: "rgba(18,18,18,0.75)", fontWeight: 700 }}
+                      >
+                        Hybrid Retrieval
+                      </text>
+                      <text
+                        x="322"
+                        y="158"
+                        textAnchor="middle"
+                        style={{ fontSize: "12px", fill: "rgba(18,18,18,0.75)", fontWeight: 700 }}
+                      >
+                        Agents
+                      </text>
+                      <text
+                        x="525"
+                        y="118"
+                        textAnchor="middle"
+                        style={{ fontSize: "12px", fill: "rgba(18,18,18,0.75)", fontWeight: 700 }}
+                      >
+                        Grounded Agronomy Answers
+                      </text>
+                      <text
+                        x="322"
+                        y="242"
+                        textAnchor="middle"
+                        style={{ fontSize: "11px", fill: "rgba(18,18,18,0.55)" }}
+                      >
+                        Continuous retrieval & evaluation feedback loop
+                      </text>
+                    </svg>
+                  </div>
+                </div>
+
+                <div className="mt-5">
+                  <p className="eyebrow-mono text-black/55">key contributions</p>
+                  <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                    {CURRENT_ROLE_CONTRIBUTIONS.map((item) => (
+                      <div key={item} className="rounded-lg border border-black/10 bg-white/75 p-3">
+                        <p className="text-sm leading-6 text-black/65">{item}</p>
                       </div>
                     ))}
                   </div>
                 </div>
-                <div className="mt-5">
-                  <p className="eyebrow-mono text-black/55">key contributions</p>
-                  <ul className="mt-2 list-disc space-y-2 pl-5 text-sm leading-6 text-black/65">
-                    {CURRENT_ROLE_CONTRIBUTIONS.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
+
                 <div className="mt-5">
                   <p className="eyebrow-mono text-black/55">problems solved</p>
-                  <ul className="mt-2 list-disc space-y-2 pl-5 text-sm leading-6 text-black/65">
+                  <div className="mt-3 grid gap-2 sm:grid-cols-2">
                     {CURRENT_ROLE_PROBLEMS_SOLVED.map((item) => (
-                      <li key={item}>{item}</li>
+                      <div key={item} className="rounded-lg border border-black/10 bg-white/75 p-3">
+                        <p className="text-sm leading-6 text-black/65">{item}</p>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
+                </div>
+
+                <div className="mt-5 grid gap-2 sm:grid-cols-3">
+                  <div className="rounded-lg border border-black/10 bg-white p-3">
+                    <p className="text-xl font-bold">7</p>
+                    <p className="text-xs text-black/55">OCR/VLM pipelines benchmarked</p>
+                  </div>
+                  <div className="rounded-lg border border-black/10 bg-white p-3">
+                    <p className="text-xl font-bold">10+</p>
+                    <p className="text-xs text-black/55">major platform contributions</p>
+                  </div>
+                  <div className="rounded-lg border border-black/10 bg-white p-3">
+                    <p className="text-xl font-bold">4</p>
+                    <p className="text-xs text-black/55">core problems solved</p>
+                  </div>
                 </div>
               </div>
               <a
